@@ -22,29 +22,23 @@
   <body>
     <header class="container">
       <h1 class="text-center">Country Guessing Game</h1>
-      <!--  <label for="dark-mode" class="switch">
-        <input id="dark-mode" type="checkbox" />
-        <span class="slider round"></span>
-      </label>     -->
-      <img
-        class="img-fluid settings"
-        src="./images/setting.png"
-        alt="settings icon"
-      />
-      <hr />
+      <div class="container-sm dark-mode-div">
+        <label for="dark-mode" class="switch">
+          <input id="dark-mode" type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <img class="settings" src="./images/setting.png" alt="settings icon" />
+      <hr class="top-hr" />
     </header>
-    <div class="container row justify-content-center hint-div">
+    <div class="container-md row justify-content-center hint-div">
       <figure class="col-1">
-        <img
-          class="img-fluid hint-imgs"
-          src="./images/equator.png"
-          alt="equator image"
-        />
+        <img class="hint-imgs" src="./images/equator.png" alt="equator image" />
         <figcaption>Hemisphere</figcaption>
       </figure>
       <figure class="col-1">
         <img
-          class="img-fluid hint-imgs"
+          class="hint-imgs"
           src="./images/australia.png"
           alt="equator image"
         />
@@ -52,20 +46,52 @@
       </figure>
       <figure class="col-1">
         <img
-          class="img-fluid hint-imgs"
+          class="hint-imgs"
           src="./images/citizens.png"
           alt="equator image"
         />
         <figcaption>Population</figcaption>
       </figure>
       <figure class="col-1">
-        <img
-          class="img-fluid hint-imgs"
-          src="./images/compass.png"
-          alt="equator image"
-        />
+        <img class="hint-imgs" src="./images/compass.png" alt="equator image" />
         <figcaption>Directions</figcaption>
       </figure>
+    </div>
+    <div class="container row justify-content-evenly guess-location-div">
+      <h5 class="row justify-content-start">1.Peru</h5>
+      <div class="container guess-hint-div">Southern</div>
+      <div class="container guess-hint-div">America</div>
+      <div class="container guess-hint-div">Population</div>
+      <div class="container guess-hint-div">Directions</div>
+    </div>
+
+    <div class="container-md input-div">
+      <hr class="bottom-hr" />
+      <form
+        id="my-form"
+        class="container-md d-flex justify-content-center align-items-center form-div"
+      >
+        <img
+          class="question-mark-img"
+          src="./images/question-mark.png"
+          alt="question-mark image"
+        />
+        <div class="country-guess-border">
+          <input
+            class="country-guess align-self-end"
+            type="text"
+            name="country-guess"
+            placeholder="Guess A Country"
+            autocomplete="off"
+          />
+        </div>
+        <input
+          type="image"
+          class="enter-img"
+          src="./images/enter.png"
+          alt="enter image"
+        />
+      </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="index.js"></script>

@@ -1,3 +1,8 @@
+:root {
+  --whiteColor: white;
+  --secondaryColor: #333;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,16 +10,17 @@
 }
 
 body {
-  background: #333;
-  color: white;
-  /* background-image: url("https://media.istockphoto.com/id/1203191150/vector/world-map-outline-illustration-as-image.jpg?s=612x612&w=0&k=20&c=6pmXP3vtmWJhP_ZZSHlhUhNGtW76QGYgGP9Qp55aPGU=");
+  background: var(--secondaryColor);
+  color: var(--whiteColor);
+  background-image: url(../images/worldmap.png);
+  background-size: 30%;
   background-repeat: no-repeat;
-  background-position: center; */
+  background-position: center;
   text-align: center;
 }
 
 header {
-  padding-top: 2em;
+  padding-top: 1em;
 }
 
 h1 {
@@ -24,11 +30,11 @@ h1 {
   letter-spacing: 2px;
 }
 
-hr {
-  border: 1px solid white;
-  opacity: 0.5;
+.top-hr {
+  border: 1px solid var(--whiteColor);
+  opacity: 70%;
   width: 35%;
-  margin: 0 auto 0 auto;
+  margin: 3px auto 0 auto;
 }
 
 .switch {
@@ -62,7 +68,7 @@ hr {
   width: 20px;
   left: 2px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--whiteColor);
   transition: 0.4s;
 }
 
@@ -91,7 +97,7 @@ input:checked + .slider:before {
   height: 24px;
   border-radius: 5px;
   border: none;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
   margin-left: 10px;
   cursor: pointer;
 }
@@ -104,4 +110,110 @@ input:checked + .slider:before {
 .hint-imgs {
   width: 45px;
   height: 45px;
+}
+
+figcaption {
+  padding-top: 5px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.bottom-hr {
+  margin: 12rem auto 0 auto;
+  border: 1px solid var(--whiteColor);
+  opacity: 70%;
+  width: 35%;
+}
+
+.question-mark-img {
+  width: 45px;
+  height: 45px;
+  border: 1px solid var(--whiteColor);
+  opacity: 1;
+  border-radius: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.enter-img {
+  width: 46px;
+  height: 46px;
+  margin-top: 15px;
+  background: linear-gradient(#666666, #8b8b8b);
+  opacity: 1;
+  border-radius: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.country-guess {
+  height: 30px;
+  min-width: 230px;
+  padding: 8px;
+  font-size: 1em;
+  background: var(--secondaryColor);
+  color: var(--whiteColor);
+  border: none;
+  text-align: center;
+  border-bottom: 1px solid rgb(139, 139, 139);
+}
+
+.country-guess::placeholder {
+  color: var(--whiteColor);
+  text-align: center;
+  font-size: 1em;
+}
+
+.country-guess:focus,
+.country-guess:active {
+  opacity: 1;
+  border-bottom: 1px solid var(--whiteColor);
+  outline: none;
+  padding: 8px;
+  font-size: 1em;
+  transition: 0.4s ease-in;
+}
+
+.country-guess-border {
+  border: 1px solid var(--whiteColor);
+  border-radius: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 15px 15px 0 15px;
+}
+
+.dark-mode-div {
+  display: none;
+}
+
+h5 {
+  margin-bottom: 15px;
+}
+
+.guess-location-div {
+  width: 24%;
+  max-height: 55vh;
+  margin: 0 auto;
+  padding: 1em;
+  overflow-y: auto;
+}
+
+.guess-location-div::-webkit-scrollbar {
+  background: #444;
+}
+
+.guess-location-div::-webkit-scrollbar-thumb {
+  background: #5f5e5e;
+}
+
+.guess-hint-div {
+  width: 74px;
+  height: 70px;
+  border-radius: 100%;
+  background: red;
+  padding: 22px 0 0 0;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
