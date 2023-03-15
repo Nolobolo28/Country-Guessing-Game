@@ -108,9 +108,8 @@ function createGuess() {
 }
 
 function showSettings() {
-  $(".hint-div").css("display", "none");
-  addDiv.css("display", "none");
-  $(".input-div").css("display", "none");
+  $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle();
+  $("body").css("background-image", "none");
 }
 
 function clear() {
@@ -127,4 +126,4 @@ function clear() {
 
 form.on("submit", getGuess);
 
-settings.on("click", showSettings);
+settings.click(showSettings);

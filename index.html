@@ -25,22 +25,22 @@
       <img class="settings" src="./images/setting.png" alt="settings icon" />
       <hr class="top-hr m-auto" />
     </header>
-
-    <div class="container settings-divs">
-      <div class="row justify-content-center">
+    <!---->
+    <div class="container text-center settings-divs main-settings">
+      <div class="row justify-content-center align-items-center">
         <div class="col-3">
           <h4 class="blue-linear">Settings</h4>
         </div>
-        <div class="col-1 text-end">
+        <div class="col-3">
           <img class="exit-img" src="./images/exit.png" alt="exit image" />
         </div>
       </div>
 
-      <div class="row justify-content-center settings-divs">
+      <div class="row justify-content-center align-items-center settings-divs">
         <div class="col-3">
           <h5 class="blue-linear">Light Mode</h5>
         </div>
-        <div class="col-1 text-end">
+        <div class="col-3">
           <label for="dark-mode" class="switch">
             <input id="dark-mode" type="checkbox" />
             <span class="slider round"></span>
@@ -48,20 +48,20 @@
         </div>
       </div>
 
-      <div class="row justify-content-center settings-divs">
-        <div class="col-3 text-center ms-4">
+      <div class="row justify-content-center align-items-center settings-divs">
+        <div class="col-3">
           <h5 class="blue-linear">How To Play</h5>
         </div>
-        <div class="col-3 text-end">
+        <div class="col-3">
           <p>Start by guessing any country you want.</p>
         </div>
       </div>
 
-      <div class="row justify-content-center settings-divs">
-        <div class="col-3 pt-3 pe-5 text-center">
+      <div class="row justify-content-center align-items-center settings-divs">
+        <div class="col-3">
           <h5 class="blue-linear">Hints</h5>
         </div>
-        <div class="col-3 text-center">
+        <div class="col-3">
           <p>
             After guessing a country, hints in these categories hemisphere,
             continent, population, and distance will be displayed.
@@ -69,94 +69,120 @@
         </div>
       </div>
 
-      <div class="row justify-content-center settings-divs">
+      <div class="row justify-content-center align-items-center settings-divs">
         <div class="col-3">
           <div class="guess-hint-div center red"></div>
         </div>
-        <div class="col-3 text-center pe-4 me-3">
+        <div class="col-3">
           <p>Wrong in the given category.</p>
         </div>
 
-        <div class="row justify-content-center settings-divs">
-          <div class="col-3 pe-4 me-2">
+        <div
+          class="row justify-content-center align-items-center settings-divs"
+        >
+          <div class="col-3">
             <div class="guess-hint-div green"></div>
           </div>
-          <div class="col-3 me-1 pe-4 text-center">
+          <div class="col-3">
             <p>Correct in the given category.</p>
           </div>
         </div>
 
-        <div class="row justify-content-center settings-divs">
-          <div class="col-3 pe-4 me-3">
-            <div class="guess-hint-div center red"></div>
+        <div
+          class="row justify-content-center align-items-center settings-divs"
+        >
+          <div class="col-3">
+            <div class="guess-hint-div blue"></div>
           </div>
-          <div class="col-3 text-center">
-            <p>Distance will always be shown in blue to indicate proximity to the country as you get closer.</p>
+          <div class="col-3">
+            <p>
+              Distance will always be shown in blue to indicate proximity to the
+              country as you get closer.
+            </p>
           </div>
-
-      </div>
-    </div>
-    <div class="container-md row justify-content-center hint-div">
-      <figure class="col-1">
-        <img class="hint-imgs" src="./images/equator.png" alt="equator image" />
-        <figcaption>Hemisphere</figcaption>
-      </figure>
-      <figure class="col-1">
-        <img
-          class="hint-imgs"
-          src="./images/australia.png"
-          alt="equator image"
-        />
-        <figcaption>Continent</figcaption>
-      </figure>
-      <figure class="col-1">
-        <img
-          class="hint-imgs"
-          src="./images/citizens.png"
-          alt="equator image"
-        />
-        <figcaption>Population</figcaption>
-      </figure>
-      <figure class="col-1">
-        <img
-          class="hint-imgs"
-          src="./images/distance.png"
-          alt="distance image"
-        />
-        <figcaption>Distance</figcaption>
-      </figure>
-    </div>
-    <div class="container row justify-content-evenly guess-location-div"></div>
-
-    <div class="container-md input-div">
-      <hr class="bottom-hr" />
-      <form
-        id="my-form"
-        class="container-md d-flex justify-content-center align-items-center form-div"
-      >
-        <img
-          class="question-mark-img"
-          src="./images/question-mark.png"
-          alt="question-mark image"
-        />
-        <div class="country-guess-border">
-          <input
-            class="country-guess align-self-end"
-            type="text"
-            name="country-guess"
-            placeholder="Guess A Country"
-            autocomplete="off"
-          />
         </div>
-        <input
-          type="image"
-          class="enter-img"
-          src="./images/enter.png"
-          alt="enter image"
-        />
-      </form>
+      </div>
+      <div class="container text-center hint-div">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-1">
+            <figure>
+              <img
+                class="hint-imgs"
+                src="./images/equator.png"
+                alt="equator image"
+              />
+              <figcaption>Hemisphere</figcaption>
+            </figure>
+          </div>
+          <div class="col-1">
+            <figure>
+              <img
+                class="hint-imgs"
+                src="./images/australia.png"
+                alt="equator image"
+              />
+              <figcaption>Continent</figcaption>
+            </figure>
+          </div>
+          <div class="col-1">
+            <figure>
+              <img
+                class="hint-imgs"
+                src="./images/citizens.png"
+                alt="equator image"
+              />
+              <figcaption>Population</figcaption>
+            </figure>
+          </div>
+          <div class="col-1">
+            <figure>
+              <img
+                class="hint-imgs"
+                src="./images/distance.png"
+                alt="distance image"
+              />
+              <figcaption>Distance</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div
+        class="container row justify-content-evenly guess-location-div"
+      ></div>
+
+      <div class="container-md input-div">
+        <hr class="bottom-hr m-auto" />
+        <form
+          id="my-form"
+          class="container-md d-flex justify-content-center align-items-center form-div"
+        >
+          <img
+            class="question-mark-img"
+            src="./images/question-mark.png"
+            alt="question-mark image"
+          />
+          <div class="country-guess-border">
+            <input
+              class="country-guess align-self-end"
+              type="text"
+              name="country-guess"
+              placeholder="Guess A Country"
+              autocomplete="off"
+            />
+          </div>
+          <input
+            type="image"
+            class="enter-img"
+            src="./images/enter.png"
+            alt="enter image"
+          />
+        </form>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+      <script src="index.js"></script>
+      <body>
+        <html></html>
+      </body>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="index.js"></script>
   </body>
 </html>
