@@ -20,17 +20,82 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <header class="container">
-      <h1 class="text-center">Country Guessing Game</h1>
-      <div class="container-sm dark-mode-div">
-        <label for="dark-mode" class="switch">
-          <input id="dark-mode" type="checkbox" />
-          <span class="slider round"></span>
-        </label>
-      </div>
+    <header class="container text-center">
+      <h1>Country Guessing Game</h1>
       <img class="settings" src="./images/setting.png" alt="settings icon" />
-      <hr class="top-hr" />
+      <hr class="top-hr m-auto" />
     </header>
+
+    <div class="container settings-divs">
+      <div class="row justify-content-center">
+        <div class="col-3">
+          <h4 class="blue-linear">Settings</h4>
+        </div>
+        <div class="col-1 text-end">
+          <img class="exit-img" src="./images/exit.png" alt="exit image" />
+        </div>
+      </div>
+
+      <div class="row justify-content-center settings-divs">
+        <div class="col-3">
+          <h5 class="blue-linear">Light Mode</h5>
+        </div>
+        <div class="col-1 text-end">
+          <label for="dark-mode" class="switch">
+            <input id="dark-mode" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row justify-content-center settings-divs">
+        <div class="col-3 text-center ms-4">
+          <h5 class="blue-linear">How To Play</h5>
+        </div>
+        <div class="col-3 text-end">
+          <p>Start by guessing any country you want.</p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center settings-divs">
+        <div class="col-3 pt-3 pe-5 text-center">
+          <h5 class="blue-linear">Hints</h5>
+        </div>
+        <div class="col-3 text-center">
+          <p>
+            After guessing a country, hints in these categories hemisphere,
+            continent, population, and distance will be displayed.
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center settings-divs">
+        <div class="col-3">
+          <div class="guess-hint-div center red"></div>
+        </div>
+        <div class="col-3 text-center pe-4 me-3">
+          <p>Wrong in the given category.</p>
+        </div>
+
+        <div class="row justify-content-center settings-divs">
+          <div class="col-3 pe-4 me-2">
+            <div class="guess-hint-div green"></div>
+          </div>
+          <div class="col-3 me-1 pe-4 text-center">
+            <p>Correct in the given category.</p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center settings-divs">
+          <div class="col-3 pe-4 me-3">
+            <div class="guess-hint-div center red"></div>
+          </div>
+          <div class="col-3 text-center">
+            <p>Distance will always be shown in blue to indicate proximity to the country as you get closer.</p>
+          </div>
+
+      </div>
+    </div>
     <div class="container-md row justify-content-center hint-div">
       <figure class="col-1">
         <img class="hint-imgs" src="./images/equator.png" alt="equator image" />
@@ -53,17 +118,15 @@
         <figcaption>Population</figcaption>
       </figure>
       <figure class="col-1">
-        <img class="hint-imgs" src="./images/distance.png" alt="distance image" />
+        <img
+          class="hint-imgs"
+          src="./images/distance.png"
+          alt="distance image"
+        />
         <figcaption>Distance</figcaption>
       </figure>
     </div>
-    <div class="container row justify-content-evenly guess-location-div">
-      <h5 class="row justify-content-start">1.Peru</h5>
-      <div class="guess-hint-div">Southern</div>
-      <div class="guess-hint-div">America</div>
-      <div class="guess-hint-div">Population</div>
-      <div class="guess-hint-div">Directions</div>
-    </div>
+    <div class="container row justify-content-evenly guess-location-div"></div>
 
     <div class="container-md input-div">
       <hr class="bottom-hr" />

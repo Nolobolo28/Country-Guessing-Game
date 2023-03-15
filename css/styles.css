@@ -16,7 +16,6 @@ body {
   background-size: 30%;
   background-repeat: no-repeat;
   background-position: center;
-  text-align: center;
 }
 
 header {
@@ -34,7 +33,6 @@ h1 {
   border: 1px solid var(--whiteColor);
   opacity: 70%;
   width: 35%;
-  margin: 3px auto 0 auto;
 }
 
 .switch {
@@ -102,6 +100,22 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
+.blue-linear {
+  color: rgb(93, 224, 247);
+}
+
+.settings-divs {
+  /* display: none; */
+  padding-top: 2rem;
+}
+
+.exit-img {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(0.2turn, rgb(93, 224, 247), rgb(172, 54, 219));
+  border-radius: 100%;
+}
+
 .hint-div {
   padding-top: 1.1em;
   margin: auto;
@@ -119,7 +133,7 @@ figcaption {
 }
 
 .bottom-hr {
-  margin: 12rem auto 0 auto;
+  margin: 30rem auto 0 auto;
   border: 1px solid var(--whiteColor);
   opacity: 70%;
   width: 35%;
@@ -183,9 +197,9 @@ figcaption {
   margin: 15px 15px 0 15px;
 }
 
-.dark-mode-div {
+/* .dark-mode-div {
   display: none;
-}
+} */
 
 h5 {
   margin-bottom: 15px;
@@ -212,10 +226,10 @@ h5 {
   height: 70px;
   border-radius: 100%;
   padding: 22px 0 0 0;
-  background: lightblue;
   font-size: 12px;
   letter-spacing: 1px;
   font-weight: 500;
+  margin: auto;
 }
 
 .red {
