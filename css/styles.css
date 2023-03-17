@@ -118,6 +118,11 @@ input:checked + .slider:before {
   height: 20px;
   background: linear-gradient(0.2turn, rgb(93, 224, 247), rgb(172, 54, 219));
   border-radius: 100%;
+  cursor: pointer;
+}
+
+.exit-img:hover {
+  background: linear-gradient(0.2turn, rgb(177, 53, 37), rgb(93, 224, 247));
 }
 
 .hint-div {
@@ -144,6 +149,7 @@ figcaption {
   border: 1px solid var(--whiteColor);
   opacity: 70%;
   width: 35%;
+  z-index: -1;
 }
 
 .question-mark-img {
@@ -157,6 +163,10 @@ figcaption {
   cursor: pointer;
 }
 
+.question-mark-img:hover {
+  background: #535353;
+}
+
 .enter-img {
   width: 46px;
   height: 46px;
@@ -166,6 +176,10 @@ figcaption {
   border-radius: 100%;
   padding: 10px;
   cursor: pointer;
+}
+
+.enter-img:hover {
+  background: linear-gradient(#8888, #9999);
 }
 
 .country-guess {

@@ -4,6 +4,7 @@ const addDiv = $(".guess-location-div");
 const settings = $(".settings");
 let answer = {};
 let colors = [];
+let countryNames = [];
 let guesses = 0;
 let guess;
 let userGuess;
@@ -11,14 +12,14 @@ let countries;
 let haversineDistance;
 
 (async function getCountries() {
-  //const res = await fetch(
-    //"https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
-  //);
+  const res = await fetch(
+    "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
+  );
   const countryData = await res.json();
   let randoNum = Math.floor(Math.random() * 251);
   while (countryData[randoNum].independent !== true) {
     randoNum = Math.floor(Math.random() * 251);
-    //console.log("ran");
+    console.log("ran");
   }
   const hemi = countryData[randoNum].latlng[0] > 0 ? "Northern" : "Southern";
   answer = {
@@ -29,15 +30,22 @@ let haversineDistance;
     population: countryData[randoNum].population,
     hemisphere: hemi,
   };
+  for (let i = 0; i < countryData.length; i++) {
+    if (countryData[i].independent === true) {
+      countryNames.push(countryData[i].name.common.toLowerCase()); //adding all the country names to an array we can filter when the user types characters
+    }
+  }
+  console.log(countryNames);
   console.log(countryData);
   countries = [...countryData];
+  console.log(countries);
 })();
 function getGuess(ev) {
   ev.preventDefault();
   let myForm = ev.target;
   let fd = new FormData(myForm);
   for (const [key, value] of fd) {
-    guess = value;
+    guess = value.toLowerCase(); //making sure the guess is formatted to match the answer's name
   }
   for (let i = 0; i < countries.length; i++) {
     if (countries[i].name.common === guess) {
@@ -108,8 +116,14 @@ function createGuess() {
 }
 
 function showSettings() {
+  let backgroundImg;
+  if ($("body").css("background-image") === "url(../images/worldmap.png)") {
+    backgroundImg = "none";
+  } else {
+    backgroundImg = "url(../images/worldmap.png)";
+  }
   $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle();
-  $("body").css("background-image", "none");
+  $("body").css("background-image", backgroundImg);
 }
 
 function clear() {
@@ -124,6 +138,33 @@ function clear() {
   }
 }
 
+function lightMode() {
+  console.log($("#dark-mode").is("checked")); //fix this
+  if ($("#dark-mode").is("checked") === false) {
+    $("body").css("background", "rgb(211, 208, 208)");
+    $("body").css("color", "#333");
+  } else {
+    $("body").css("background-color", "#333");
+    $("body").css("color", "white");
+  }
+}
+function autoSuggestion(e) {
+  let val = e.target.value.toLowerCase();
+  console.log(val);
+  countryNames = countryNames.filter((country) => {
+    return country.includes(val[val.length - 1]);
+  });
+  //countryNames = countryNames.sort();
+  console.log(countryNames);
+  // $(".bottom-hr").append("<h1>Hello</h1>")
+}
+
 form.on("submit", getGuess);
 
 settings.click(showSettings);
+
+$(".exit-img").click(showSettings);
+
+$("#dark-mode").click(lightMode);
+
+$(".country-guess").on("input", autoSuggestion);
