@@ -12,9 +12,9 @@ let countries;
 let haversineDistance;
 
 (async function getCountries() {
-  const res = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
-  );
+  //const res = await fetch(
+  //  "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
+  //);
   const countryData = await res.json();
   let randoNum = Math.floor(Math.random() * 251);
   while (countryData[randoNum].independent !== true) {
@@ -137,11 +137,12 @@ function clear() {
     setTimeout(() => location.reload(), 5000);
   }
 }
-
+let checked = false;
 function lightMode() {
-  console.log($("#dark-mode").is("checked")); //fix this
-  if ($("#dark-mode").is("checked") === false) {
-    $("body").css("background", "rgb(211, 208, 208)");
+  checked = !checked;
+  console.log(checked);
+  if (checked) {
+    $("body").css("background-color", "rgb(211, 208, 208)");
     $("body").css("color", "#333");
   } else {
     $("body").css("background-color", "#333");
