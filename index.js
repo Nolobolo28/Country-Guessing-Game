@@ -10,11 +10,12 @@ let guess;
 let userGuess;
 let countries;
 let haversineDistance;
+let names = [];
 
 (async function getCountries() {
-  //const res = await fetch(
-  //  "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
-  //);
+  const res = await fetch(
+    "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
+  );
   const countryData = await res.json();
   let randoNum = Math.floor(Math.random() * 251);
   while (countryData[randoNum].independent !== true) {
@@ -35,10 +36,10 @@ let haversineDistance;
       countryNames.push(countryData[i].name.common.toLowerCase()); //adding all the country names to an array we can filter when the user types characters
     }
   }
-  console.log(countryNames);
   console.log(countryData);
+  console.log(countryNames);
+  names = [...countryNames];
   countries = [...countryData];
-  console.log(countries);
 })();
 function getGuess(ev) {
   ev.preventDefault();
@@ -149,14 +150,15 @@ function lightMode() {
     $("body").css("color", "white");
   }
 }
+
 function autoSuggestion(e) {
-  let val = e.target.value.toLowerCase();
-  console.log(val);
-  countryNames = countryNames.filter((country) => {
+  console.log(e.target.value);
+  let val = e.target.value;
+  names = names.filter((country) => {
     return country.includes(val[val.length - 1]);
   });
-  //countryNames = countryNames.sort();
-  console.log(countryNames);
+  names = names.sort();
+  console.log(names);
   // $(".bottom-hr").append("<h1>Hello</h1>")
 }
 
