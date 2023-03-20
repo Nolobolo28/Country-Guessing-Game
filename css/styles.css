@@ -263,7 +263,6 @@ h5 {
 }
 
 .suggestion-div {
-  border: 1px solid blue;
   display: none;
 }
 
@@ -307,11 +306,39 @@ h5 {
   padding-right: 3px;
 }
 
-.correct-answer {
-  display: none;
-}
-
 .invalid-guess {
   color: red;
   display: none;
+}
+
+.congrats-h2 {
+  letter-spacing: 1px;
+}
+
+.pin-img {
+  width: 25px;
+  height: 25px;
+}
+
+.give-answer-btn {
+  width: 70px;
+  height: 40px;
+  font-size: 18px;
+  display: block;
+}
+
+.confirm-give-answer {
+  display: inline;
+}
+
+.give-answer-exit {
+  width: 20px;
+  height: 20px;
+  background: var(--whiteColor);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.give-answer-exit:hover {
+  background: rgb(211, 210, 210);
 }

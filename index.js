@@ -138,14 +138,22 @@ function createGuess() {
   let distanceColor;
   if (correctGuess) {
     distanceColor = "green"; //if the user guesses correctly the distance div color will be displayed green
+    let pinDiv = $(`<div></div>`).addClass(`guess-hint-div ${distanceColor}`);
+    addDiv.append(pinDiv);
+    pinDiv.append(
+      $("<img></img>")
+        .addClass("pin-img p-auto")
+        .attr("src", "./images/pin.png")
+        .attr("alt", "location pin image")
+    );
   } else {
     distanceColor = "blue";
+    addDiv.append(
+      $(`<div>${haversineDistance} miles</div>`).addClass(
+        `guess-hint-div ${distanceColor}`
+      )
+    );
   }
-  addDiv.append(
-    $(`<div>${haversineDistance} miles</div>`).addClass(
-      `guess-hint-div ${distanceColor}`
-    )
-  );
   if (correctGuess === false) {
     clear();
   }
@@ -168,8 +176,10 @@ function checkGuess() {
   if (userGuess.name === answer.name) {
     $(".input-div").css("display", "none");
     correctGuess = true;
-    $(".correct-answer").css("display", "block");
+    $(".correct-answer").removeClass("collapse");
+    $(".correct-answer").addClass("show");
     setTimeout(() => location.reload(), 10000);
+    console.log("checked correctly");
   }
   createGuess();
 }
@@ -222,6 +232,35 @@ function fillInput(e) {
   $(".suggestion-div").css("display", "none"); //hiding the suggestion countries since we filled the input box
 }
 
+function giveAnswer() {
+  $(
+    ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+  ).removeClass("collapse");
+  $(
+    ".correct-answer, .give-answer-btn, .confirm-give-answer .give-answer-exit"
+  ).addClass("show");
+  $("#go-again, .congrats-h2, .first-bottom-hr").addClass("collapse");
+}
+
+let gaveAnswer = false;
+
+function hideGiveAnswer() {
+  $(
+    ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+  ).removeClass("show");
+  $(
+    ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+  ).addClass("collapse");
+  $("#go-again, .congrats-h2, .first-bottom-hr").removeClass("collapse");
+
+  if (gaveAnswer) {
+    console.log(gaveAnswer);
+    userGuess = { ...answer };
+    $(".congrats-h2").text(`The correct country was ${answer.name}.`);
+    checkGuess();
+  }
+}
+
 form.on("submit", getGuess);
 
 settings.click(showSettings);
@@ -234,8 +273,17 @@ $(".country-guess").on("input", autoSuggestion);
 
 $(".suggestion-div").click(fillInput);
 
-$("document").click(function hideAutoSuggestion() {
-  $(".suggestion-div").css("display", "none");
+$("body").click(() => {
+  return $(".suggestion-div").css("display", "none");
 });
 
-$("#go-again").click(() => setTimeout(() => location.reload(), 5000));
+$(".question-mark-img").click(() => giveAnswer());
+
+$(".give-answer-exit").click(hideGiveAnswer);
+
+$(".give-answer-btn").click(() => {
+  gaveAnswer = true;
+  hideGiveAnswer();
+});
+
+$("#go-again").click(() => setTimeout(location.reload(), 1000));

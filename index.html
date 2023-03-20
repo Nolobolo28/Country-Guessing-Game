@@ -25,7 +25,6 @@
       <img class="settings" src="./images/setting.png" alt="settings icon" />
       <hr class="top-hr m-auto" />
     </header>
-    <!---->
     <div class="container text-center settings-divs main-settings">
       <div class="row justify-content-center align-items-center">
         <div class="col-3">
@@ -151,14 +150,30 @@
     <div
       class="container row justify-content-evenly text-center guess-location-div"
     ></div>
+    <div
+      class="container row align-items-center justify-content-center text-center mx-auto collapse correct-answer"
+    >
+      <div class="col">
+        <hr class="bottom-hr first-bottom-hr mx-auto" />
+        <h2 class="congrats-h2">Correct Answer!</h2>
+        <p class="collapse confirm-give-answer">
+          Clicking "Yes" will forgo your opportunity to guess the country.
+        </p>
+        <img
+          class="ms-3 collapse give-answer-exit"
+          src="./images/exit.png"
+          alt="exit image"
+        />
+        <button id="go-again" class="btn btn-primary mt-1">Play Again?</button>
+        <button class="btn btn-danger mx-auto my-3 collapse give-answer-btn">
+          Yes
+        </button>
+      </div>
+    </div>
     <div class="container-md input-div">
       <hr class="bottom-hr m-auto" />
       <div class="invalid-guess text-center mx-auto pt-3">
         <h3>Your guess is invalid!</h3>
-      </div>
-      <div class="correct-answer mx-auto">
-        <h2>Congratulations!</h2>
-        <button id="go-again" class="btn btn-primary">Go Again?</button>
       </div>
       <div class="suggestion-div">
         <ul class="suggestion-ul"></ul>
