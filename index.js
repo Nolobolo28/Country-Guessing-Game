@@ -7,10 +7,9 @@ let colors = [];
 let countryNames = [];
 let guesses = 0;
 let guess;
-let userGuess;
+let userGuess = "N/A";
 let countries;
 let haversineDistance;
-let names = [];
 
 (async function getCountries() {
   const res = await fetch(
@@ -36,18 +35,24 @@ let names = [];
       countryNames.push(countryData[i].name.common.toLowerCase()); //adding all the country names to an array we can filter when the user types characters
     }
   }
+  console.log(answer.name);
   console.log(countryData);
   console.log(countryNames);
-  names = [...countryNames];
   countries = [...countryData];
 })();
+
 function getGuess(ev) {
   ev.preventDefault();
   let myForm = ev.target;
   let fd = new FormData(myForm);
   for (const [key, value] of fd) {
-    guess = value.toLowerCase(); //making sure the guess is formatted to match the answer's name
+    guess = value;
   }
+  guess = guess.toLowerCase(); // Formatting the guess to find the country's data associated with guess
+  guess = guess.replace(/\b\w/g, (l) => l.toUpperCase());
+  guess = guess.replace(/(And)/g, (l) => l.toLowerCase()); // if the word And is in the country it is replaced to all lower case
+  console.log("ran get guess");
+  console.log(guess);
   for (let i = 0; i < countries.length; i++) {
     if (countries[i].name.common === guess) {
       userGuess = {
@@ -59,10 +64,14 @@ function getGuess(ev) {
         hemisphere: countries[i].latlng[0] > 0 ? "Northern" : "Southern",
       };
       console.log(answer);
-      createGuess();
-    } else {
-      form.trigger("reset");
+      $(".suggestion-div").css("display", "none");
+      checkGuess();
     }
+  }
+  if (userGuess === "N/A") {
+    $(".invalid-guess").css("display", "block");
+    $(".suggestion-div").css("display", "none");
+    setTimeout(clear, 5000);
   }
 }
 
@@ -82,7 +91,7 @@ function createGuess() {
   console.log(haversineDistance);
   for (let key in answer) {
     if (answer[key] === userGuess[key]) {
-      colors.push("green");
+      colors.push("green"); //if the answer's key = to userGuess's key then we want to display the color green otherwise display red for incorrect
     } else {
       colors.push("red");
     }
@@ -94,7 +103,7 @@ function createGuess() {
       `row justify-content-start`
     )
   );
-  const hemisphere = colors[5];
+  const hemisphere = colors[5]; //adding the corresponding color
   addDiv.append(
     $(`<div>${userGuess.hemisphere}</div>`).addClass(
       `guess-hint-div ${hemisphere}`
@@ -105,15 +114,41 @@ function createGuess() {
     $(`<div>${userGuess.region}</div>`).addClass(`guess-hint-div ${region}`)
   );
   const popColor = colors[4];
+  const arrowImg = $(`<div>${userGuess.population}</div>`).addClass(
+    `guess-hint-div arrow-img-div ${popColor}`
+  );
+  addDiv.append(arrowImg);
+
+  let higherLower;
+  if (answer.population > userGuess.population) {
+    higherLower = "top";
+  } else if (answer.population < userGuess.population) {
+    higherLower = "bottom";
+  }
+  let src = "./images/arrow.png";
+  let alt = "arrow image";
+  if (correctGuess === false) {
+    $(arrowImg).append(
+      $(`<img></img>`)
+        .addClass(`arrow-img ${higherLower} ${popColor}`)
+        .attr("src", src)
+        .attr("alt", alt)
+    ); //checked to see if the user guessed correctly if so there is no need to display this image
+  }
+  let distanceColor;
+  if (correctGuess) {
+    distanceColor = "green"; //if the user guesses correctly the distance div color will be displayed green
+  } else {
+    distanceColor = "blue";
+  }
   addDiv.append(
-    $(`<div>${userGuess.population}</div>`).addClass(
-      `guess-hint-div ${popColor}`
+    $(`<div>${haversineDistance} miles</div>`).addClass(
+      `guess-hint-div ${distanceColor}`
     )
   );
-  addDiv.append(
-    $(`<div>${haversineDistance} miles</div>`).addClass("guess-hint-div blue")
-  );
-  clear();
+  if (correctGuess === false) {
+    clear();
+  }
 }
 
 function showSettings() {
@@ -127,17 +162,27 @@ function showSettings() {
   $("body").css("background-image", backgroundImg);
 }
 
-function clear() {
-  if (userGuess.name !== answer.name) {
-    userGuess = {};
-    colors = [];
-    haversineDistance;
-    guess = "";
-    form.trigger("reset");
-  } else {
-    setTimeout(() => location.reload(), 5000);
+let correctGuess = false;
+
+function checkGuess() {
+  if (userGuess.name === answer.name) {
+    $(".input-div").css("display", "none");
+    correctGuess = true;
+    $(".correct-answer").css("display", "block");
+    setTimeout(() => location.reload(), 10000);
   }
+  createGuess();
 }
+
+function clear() {
+  $(".invalid-guess").css("display", "none");
+  userGuess = {};
+  colors = [];
+  haversineDistance;
+  guess = "";
+  form.trigger("reset");
+}
+
 let checked = false;
 function lightMode() {
   checked = !checked;
@@ -152,14 +197,29 @@ function lightMode() {
 }
 
 function autoSuggestion(e) {
+  $(".suggestion-div").css("display", "block");
   console.log(e.target.value);
-  let val = e.target.value;
+  let names = [...countryNames];
+  let val = e.target.value.toLowerCase().split("");
   names = names.filter((country) => {
-    return country.includes(val[val.length - 1]);
+    return val.every((letter) => {
+      return country.includes(letter); //returning every country name that includes the letters the user types
+    });
   });
   names = names.sort();
   console.log(names);
-  // $(".bottom-hr").append("<h1>Hello</h1>")
+  $(".suggestion-ul").empty();
+  names.forEach((name) => {
+    return $(".suggestion-ul").append(`<li class='suggestion-li'>${name}</li>`);
+  });
+}
+
+function fillInput(e) {
+  let countryText = $(e.target).text();
+  countryText = countryText.replace(/\b\w/g, (l) => l.toUpperCase());
+  countryText = countryText.replace(/(And)/g, (l) => l.toLowerCase());
+  $(".country-guess").val(countryText);
+  $(".suggestion-div").css("display", "none"); //hiding the suggestion countries since we filled the input box
 }
 
 form.on("submit", getGuess);
@@ -171,3 +231,11 @@ $(".exit-img").click(showSettings);
 $("#dark-mode").click(lightMode);
 
 $(".country-guess").on("input", autoSuggestion);
+
+$(".suggestion-div").click(fillInput);
+
+$("document").click(function hideAutoSuggestion() {
+  $(".suggestion-div").css("display", "none");
+});
+
+$("#go-again").click(() => setTimeout(() => location.reload(), 5000));

@@ -63,7 +63,7 @@
         </div>
         <div class="col-3">
           <p>
-            After guessing a country, hints in these categories hemisphere,
+            After guessing a country, hints in the categories of hemisphere,
             continent, population, and distance will be displayed.
           </p>
         </div>
@@ -96,7 +96,8 @@
           </div>
           <div class="col-3">
             <p>
-              Distance will always be shown in blue to indicate proximity to the
+              Distance will always be shown in blue unless the country is
+              guessed correctly; otherwise, blue will indicate proximity to the
               country as you get closer.
             </p>
           </div>
@@ -150,9 +151,18 @@
     <div
       class="container row justify-content-evenly text-center guess-location-div"
     ></div>
-
     <div class="container-md input-div">
       <hr class="bottom-hr m-auto" />
+      <div class="invalid-guess text-center mx-auto pt-3">
+        <h3>Your guess is invalid!</h3>
+      </div>
+      <div class="correct-answer mx-auto">
+        <h2>Congratulations!</h2>
+        <button id="go-again" class="btn btn-primary">Go Again?</button>
+      </div>
+      <div class="suggestion-div">
+        <ul class="suggestion-ul"></ul>
+      </div>
       <form
         id="my-form"
         class="container-md d-flex justify-content-center align-items-center form-div"

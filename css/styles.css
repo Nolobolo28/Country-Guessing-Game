@@ -127,7 +127,6 @@ input:checked + .slider:before {
 
 .hint-div {
   padding-top: 1.1em;
-  padding-bottom: 17rem;
 }
 
 .hint-imgs {
@@ -143,6 +142,7 @@ figcaption {
 
 .input-div {
   padding-top: 2rem;
+  position: relative;
 }
 
 .bottom-hr {
@@ -226,8 +226,9 @@ h5 {
   width: 24%;
   max-height: 55vh;
   margin: 0 auto;
-  padding: 1em;
+  padding-top: 1em;
   overflow-y: auto;
+  padding-bottom: 18rem;
 }
 
 .guess-location-div::-webkit-scrollbar {
@@ -259,4 +260,58 @@ h5 {
 
 .blue {
   background: #56abdd;
+}
+
+.suggestion-div {
+  border: 1px solid blue;
+  display: none;
+}
+
+.suggestion-ul {
+  max-height: 240px;
+  max-width: 17%;
+  list-style: none;
+  background: #464646;
+  opacity: 1;
+  border: none;
+  text-transform: capitalize;
+  margin: auto;
+  overflow-y: auto;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: left;
+  padding: 12px;
+  position: absolute;
+  bottom: 52px;
+  right: 0;
+  left: 0;
+}
+
+.arrow-img {
+  width: 22px;
+  height: 22px;
+}
+
+.arrow-img-div {
+  position: relative;
+}
+
+.top {
+  transform: rotate(180deg);
+  position: absolute;
+  top: 3px;
+  right: 26px;
+}
+
+.bottom {
+  padding-right: 3px;
+}
+
+.correct-answer {
+  display: none;
+}
+
+.invalid-guess {
+  color: red;
+  display: none;
 }
