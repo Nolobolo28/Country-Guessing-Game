@@ -1,4 +1,3 @@
-// eventListener on setting icon, question mark to give up and enter image
 const form = $("#my-form");
 const addDiv = $(".guess-location-div");
 const settings = $(".settings");
@@ -8,9 +7,10 @@ let countryNames = [];
 let guesses = 0;
 let guess;
 let userGuess = "N/A";
+let showGiveAnswer = false;
 let countries;
 let haversineDistance;
-
+//sao tome and principle
 (async function getCountries() {
   const res = await fetch(
     "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
@@ -41,7 +41,18 @@ let haversineDistance;
   countries = [...countryData];
 })();
 
+let alreadyGuessed = [];
+
 function getGuess(ev) {
+  if (showGiveAnswer) {
+    $(
+      ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+    ).removeClass("show");
+    $(
+      ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+    ).addClass("collapse");
+    $("#go-again, .congrats-h2, .first-bottom-hr").removeClass("collapse");
+  }
   ev.preventDefault();
   let myForm = ev.target;
   let fd = new FormData(myForm);
@@ -50,7 +61,15 @@ function getGuess(ev) {
   }
   guess = guess.toLowerCase(); // Formatting the guess to find the country's data associated with guess
   guess = guess.replace(/\b\w/g, (l) => l.toUpperCase());
-  guess = guess.replace(/(And)/g, (l) => l.toLowerCase()); // if the word And is in the country it is replaced to all lower case
+  guess = guess.replace(/(And)\s|(The)\s|(Of)\s/g, (l) => l.toLowerCase()); // if the word And is in the country it is replaced to all lower case
+  guess = guess.replace(/(Dr)/g, (l) => l.toUpperCase()); //special case where Dr Congo needs to be DR Congo for Democratic Republic of the Congo
+  guess = guess.replace(/(O)\s|(N)cipe/g, (l) => l.toLowerCase());
+  if (alreadyGuessed.indexOf(guess) !== -1 && guess !== "") {
+    $(".invalid-h3").text("You can't guess this twice!");
+    $(".invalid-guess").css("display", "block");
+    $(".suggestion-div").css("display", "none");
+    return setTimeout(clear, 2500);
+  }
   console.log("ran get guess");
   console.log(guess);
   for (let i = 0; i < countries.length; i++) {
@@ -63,15 +82,19 @@ function getGuess(ev) {
         population: countries[i].population,
         hemisphere: countries[i].latlng[0] > 0 ? "Northern" : "Southern",
       };
+      console.log(userGuess);
       console.log(answer);
       $(".suggestion-div").css("display", "none");
-      checkGuess();
+      alreadyGuessed.push(guess);
+      return checkGuess();
     }
   }
+  console.log("running userguess next");
+  console.log(userGuess);
   if (userGuess === "N/A") {
     $(".invalid-guess").css("display", "block");
     $(".suggestion-div").css("display", "none");
-    setTimeout(clear, 5000);
+    setTimeout(clear, 2500);
   }
 }
 
@@ -99,24 +122,26 @@ function createGuess() {
   guesses++; // incrementing guesses so we can add it to the h5 dynamically
   console.log(colors);
   addDiv.append(
-    $(`<h5>${guesses}.${userGuess.name}</h5>`).addClass(
-      `row justify-content-start`
+    $(`<h5>${guesses}. ${userGuess.name}</h5>`).addClass(
+      `row justify-content-start guess-h5`
     )
   );
   const hemisphere = colors[5]; //adding the corresponding color
   addDiv.append(
     $(`<div>${userGuess.hemisphere}</div>`).addClass(
-      `guess-hint-div ${hemisphere}`
+      `guess-hint-div mx-auto ${hemisphere}`
     )
   );
   const region = colors[1];
   addDiv.append(
-    $(`<div>${userGuess.region}</div>`).addClass(`guess-hint-div ${region}`)
+    $(`<div>${userGuess.region}</div>`).addClass(
+      `guess-hint-div mx-auto ${region}`
+    )
   );
   const popColor = colors[4];
-  const arrowImg = $(`<div>${userGuess.population}</div>`).addClass(
-    `guess-hint-div arrow-img-div ${popColor}`
-  );
+  const arrowImg = $(
+    `<div>${userGuess.population.toLocaleString()}</div>`
+  ).addClass(`guess-hint-div mx-auto arrow-img-div ${popColor}`);
   addDiv.append(arrowImg);
 
   let higherLower;
@@ -138,7 +163,9 @@ function createGuess() {
   let distanceColor;
   if (correctGuess) {
     distanceColor = "green"; //if the user guesses correctly the distance div color will be displayed green
-    let pinDiv = $(`<div></div>`).addClass(`guess-hint-div ${distanceColor}`);
+    let pinDiv = $(`<div></div>`).addClass(
+      `guess-hint-div mx-auto ${distanceColor}`
+    );
     addDiv.append(pinDiv);
     pinDiv.append(
       $("<img></img>")
@@ -149,10 +176,14 @@ function createGuess() {
   } else {
     distanceColor = "blue";
     addDiv.append(
-      $(`<div>${haversineDistance} miles</div>`).addClass(
-        `guess-hint-div ${distanceColor}`
+      $(`<div>${haversineDistance.toLocaleString()}mi</div>`).addClass(
+        `guess-hint-div mx-auto miles-div ${distanceColor}`
       )
     );
+  }
+  if (guesses > 3) {
+    addDiv.scrollTop($(".guess-location-div")[0].scrollHeight); //sets the scrollTop of the element to the scrollHeight of the element moving the scrollbar to the bottom
+    $(".guess-location-div").css("padding-bottom", "2rem");
   }
   if (correctGuess === false) {
     clear();
@@ -186,24 +217,11 @@ function checkGuess() {
 
 function clear() {
   $(".invalid-guess").css("display", "none");
-  userGuess = {};
   colors = [];
   haversineDistance;
   guess = "";
+  userGuess = "N/A";
   form.trigger("reset");
-}
-
-let checked = false;
-function lightMode() {
-  checked = !checked;
-  console.log(checked);
-  if (checked) {
-    $("body").css("background-color", "rgb(211, 208, 208)");
-    $("body").css("color", "#333");
-  } else {
-    $("body").css("background-color", "#333");
-    $("body").css("color", "white");
-  }
 }
 
 function autoSuggestion(e) {
@@ -227,12 +245,18 @@ function autoSuggestion(e) {
 function fillInput(e) {
   let countryText = $(e.target).text();
   countryText = countryText.replace(/\b\w/g, (l) => l.toUpperCase());
-  countryText = countryText.replace(/(And)/g, (l) => l.toLowerCase());
+  countryText = countryText.replace(/(And)\s|(The)\s|(Of)\s/g, (l) =>
+    l.toLowerCase()
+  );
+  countryText = countryText.replace(/(Dr)/g, (l) => l.toUpperCase()); //special case where Dr Congo needs to be DR Congo for Democratic Republic of the Congo
+  countryText = countryText.replace(/(O)\s|(N)cipe/g, (l) => l.toLowerCase());
   $(".country-guess").val(countryText);
   $(".suggestion-div").css("display", "none"); //hiding the suggestion countries since we filled the input box
+  $(".country-guess").focus();
 }
 
 function giveAnswer() {
+  showGiveAnswer = true;
   $(
     ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
   ).removeClass("collapse");
@@ -245,6 +269,7 @@ function giveAnswer() {
 let gaveAnswer = false;
 
 function hideGiveAnswer() {
+  showGiveAnswer = false;
   $(
     ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
   ).removeClass("show");
@@ -266,8 +291,6 @@ form.on("submit", getGuess);
 settings.click(showSettings);
 
 $(".exit-img").click(showSettings);
-
-$("#dark-mode").click(lightMode);
 
 $(".country-guess").on("input", autoSuggestion);
 
