@@ -21,70 +21,69 @@
   </head>
   <body>
     <header class="container text-center">
-      <h1>Country Guessing Game</h1>
+      <h1 class="h1-title">Country Guessing Game</h1>
       <img class="settings" src="./images/setting.png" alt="settings icon" />
       <hr class="top-hr m-auto" />
     </header>
     <div class="container text-center settings-divs main-settings">
       <div class="row justify-content-center align-items-center">
-        <div class="col-3">
-          <h4 class="blue-linear">Settings</h4>
+        <div class="col-xs-auto col-sm-6 col-md-3">
+          <h5 class="blue-linear">Settings</h5>
         </div>
-        <div class="col-3">
+        <div class="col-xs-auto col-sm-6 col-md-3">
           <img class="exit-img" src="./images/exit.png" alt="exit image" />
         </div>
       </div>
 
       <div class="row justify-content-center align-items-center settings-divs">
-        <div class="col-3">
+        <div class="col-xs-auto col-sm-6 col-md-3">
           <h5 class="blue-linear">How To Play</h5>
         </div>
-        <div class="col-3">
-          <p>
-            Start by guessing any country you want.
-          </p>
+        <div class="col-xs-auto col-sm-6 col-md-3">
+          <p class="settings-p">Start by guessing any country you want.</p>
         </div>
       </div>
 
       <div class="row justify-content-center align-items-center settings-divs">
-        <div class="col-3">
+        <div class="col-xs-auto col-sm-6 col-md-3">
           <h5 class="blue-linear">Guess Hints</h5>
         </div>
-        <div class="col-3">
-          <p>
+        <div class="col-xs-auto col-sm-6 col-md-3">
+          <p class="settings-p">
             After guessing a country, hints in the categories of hemisphere,
             continent, population, and distance will be displayed.
           </p>
         </div>
       </div>
 
-      <div class="row justify-content-center align-items-center settings-divs">
-        <div class="col-3 ms-1">
-          <div class="guess-hint-div mx-auto red"></div>
-        </div>
-        <div class="col-3">
-          <p>Wrong in the given category.</p>
+      <div
+          class="row justify-content-center align-items-center settings-divs">
+          <div class="col-xs-auto col-sm-6 col-md-3 pb-3">
+            <div class="guess-hint-div mx-auto red"></div>
+          </div>
+          <div class="col-xs-auto col-sm-6 col-md-3">
+            <p class="settings-p">Wrong in the given category.</p>
+          </div>
         </div>
 
         <div
-          class="row justify-content-center align-items-center settings-divs"
-        >
-          <div class="col-3">
+          class="row justify-content-center align-items-center settings-divs">
+          <div class="col-xs-auto col-sm-6 col-md-3 pb-3">
             <div class="guess-hint-div mx-auto green"></div>
           </div>
-          <div class="col-3">
-            <p>Correct in the given category.</p>
+          <div class="col-xs-auto col-sm-6 col-md-3">
+            <p class="settings-p">Correct in the given category.</p>
           </div>
         </div>
 
         <div
           class="row justify-content-center align-items-center settings-divs"
         >
-          <div class="col-3">
+          <div class="col-xs-auto col-sm-6 col-md-3 pb-3">
             <div class="guess-hint-div mx-auto blue"></div>
           </div>
-          <div class="col-3">
-            <p>
+          <div class="col-xs-auto col-sm-6 col-md-3">
+            <p class="settings-p">
               Distance will always be shown in blue unless the country is
               guessed correctly; otherwise, blue will indicate proximity to the
               country as you get closer.
@@ -95,7 +94,7 @@
     </div>
     <div class="container text-center hint-div">
       <div class="row justify-content-center align-items-center">
-        <div class="col-1">
+        <div class="col-auto col-xl-1">
           <figure>
             <img
               class="hint-imgs"
@@ -105,7 +104,7 @@
             <figcaption>Hemisphere</figcaption>
           </figure>
         </div>
-        <div class="col-1">
+        <div class="col-auto col-xl-1">
           <figure>
             <img
               class="hint-imgs"
@@ -115,7 +114,7 @@
             <figcaption>Continent</figcaption>
           </figure>
         </div>
-        <div class="col-1">
+        <div class="col-auto col-xl-1">
           <figure>
             <img
               class="hint-imgs"
@@ -125,7 +124,7 @@
             <figcaption>Population</figcaption>
           </figure>
         </div>
-        <div class="col-1">
+        <div class="col-auto col-xl-1">
           <figure>
             <img
               class="hint-imgs"

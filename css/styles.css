@@ -185,11 +185,11 @@ h5 {
 }
 
 .guess-hint-div {
-  width: 80px;
+  width: 86px;
   height: 76px;
   border-radius: 100%;
-  padding: 24px 0 0 0;
-  font-size: 13px;
+  padding: 25px 0 0 0;
+  font-size: 12px;
   letter-spacing: 1px;
   font-weight: 600;
 }
@@ -238,23 +238,20 @@ h5 {
 
 .arrow-img-div {
   position: relative;
-  font-size: 9px;
-  font-weight: bold;
-  padding-top: 26px;
 }
 
 .top {
   transform: rotate(180deg);
   position: absolute;
-  top: 3px;
-  right: 29px;
+  top: 4px;
+  right: 33px;
 }
 
 .bottom {
   padding-right: 3px;
-  bottom: 5px;
+  bottom: 8px;
   position: absolute;
-  left: 29px;
+  left: 33px;
 }
 
 .invalid-guess {
@@ -301,4 +298,331 @@ h5 {
 
 .guess-h5 {
   padding-top: 1em;
+}
+
+@media (max-width: 480px) {
+  body {
+    background-size: 100%;
+  }
+
+  .h1-title {
+    font-size: 24px;
+  }
+
+  .settings {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 7px;
+    margin-left: 10px;
+  }
+
+  .exit-img {
+  }
+  /* on this one */
+  .top-hr {
+    width: 100%;
+  }
+
+  .settings-divs {
+    padding-top: 1rem;
+  }
+
+  .hint-imgs {
+    width: 35px;
+    height: 35px;
+  }
+
+  figcaption {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .guess-location-div {
+    width: 92%;
+    max-height: 53vh;
+    padding-top: 8px;
+    padding-bottom: 18rem;
+  }
+
+  .guess-h5 {
+    padding-top: 12px;
+    font-size: 1em;
+  }
+
+  .guess-hint-div {
+    width: 70px;
+    height: 60px;
+    border-radius: 100%;
+    padding: 20px 0 0 0;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .arrow-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .top {
+    top: 3px;
+    right: 27px;
+  }
+
+  .bottom {
+    padding-right: 3px;
+    bottom: 5px;
+    left: 27px;
+  }
+
+  .bottom-hr {
+    width: 100%;
+  }
+
+  .confirm-answer-div {
+    margin-top: 0.4em;
+  }
+
+  .give-answer-btn {
+    width: 55px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .confirm-give-answer {
+    font-size: 14px;
+  }
+
+  .give-answer-exit {
+    width: 15px;
+    height: 15px;
+  }
+
+  .congrats-h2 {
+    padding: 8px;
+    font-size: 1.3em;
+  }
+
+  .input-div {
+    padding-top: 1rem;
+  }
+
+  .invalid-h3 {
+    font-size: 20px;
+  }
+
+  .suggestion-ul {
+    max-height: 140px;
+    max-width: 59%;
+    font-size: 1em;
+    padding: 10px;
+    bottom: 48px;
+  }
+
+  .pin-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .question-mark-img {
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+    margin-top: 12px;
+  }
+
+  .country-guess-border {
+    margin: 10px 10px 0 10px;
+  }
+
+  .country-guess {
+    height: 25px;
+    min-width: 220px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .country-guess::placeholder {
+    font-size: 14px;
+  }
+
+  .country-guess:focus,
+  .country-guess:active {
+    font-size: 14px;
+  }
+
+  .enter-img {
+    width: 37px;
+    height: 37px;
+    margin-top: 12px;
+    padding: 8px;
+  }
+
+  .settings-p {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    background-size: 100%;
+  }
+
+  .h1-title {
+    font-size: 26px;
+  }
+
+  .settings {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 7px;
+    margin-left: 10px;
+  }
+
+  .exit-img {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 5px;
+  }
+
+  .top-hr {
+    width: 80%;
+  }
+
+  .settings-divs {
+    padding-top: 1.4rem;
+  }
+
+  .hint-imgs {
+    width: 35px;
+    height: 35px;
+  }
+
+  figcaption {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .guess-location-div {
+    width: 92%;
+    max-height: 53vh;
+    padding-top: 8px;
+    padding-bottom: 18rem;
+  }
+
+  .guess-h5 {
+    padding-top: 12px;
+    font-size: 1em;
+  }
+
+  .guess-hint-div {
+    width: 70px;
+    height: 60px;
+    border-radius: 100%;
+    padding: 20px 0 0 0;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .arrow-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .top {
+    top: 3px;
+    right: 27px;
+  }
+
+  .bottom {
+    padding-right: 3px;
+    bottom: 5px;
+    left: 27px;
+  }
+
+  .bottom-hr {
+    width: 100%;
+  }
+
+  .confirm-answer-div {
+    margin-top: 0.4em;
+  }
+
+  .give-answer-btn {
+    width: 55px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .confirm-give-answer {
+    font-size: 14px;
+  }
+
+  .give-answer-exit {
+    width: 15px;
+    height: 15px;
+  }
+
+  .congrats-h2 {
+    padding: 8px;
+    font-size: 1.3em;
+  }
+
+  .input-div {
+    padding-top: 1rem;
+  }
+
+  .invalid-h3 {
+    font-size: 20px;
+  }
+
+  .suggestion-ul {
+    max-height: 140px;
+    max-width: 59%;
+    font-size: 1em;
+    padding: 10px;
+    bottom: 48px;
+  }
+
+  .pin-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .question-mark-img {
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+    margin-top: 12px;
+  }
+
+  .country-guess-border {
+    margin: 10px 10px 0 10px;
+  }
+
+  .country-guess {
+    height: 25px;
+    min-width: 220px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .country-guess::placeholder {
+    font-size: 14px;
+  }
+
+  .country-guess:focus,
+  .country-guess:active {
+    font-size: 14px;
+  }
+
+  .enter-img {
+    width: 37px;
+    height: 37px;
+    margin-top: 12px;
+    padding: 8px;
+  }
+
+  .settings-p {
+    font-size: 13px;
+  }
 }

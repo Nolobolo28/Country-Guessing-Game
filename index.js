@@ -10,7 +10,7 @@ let userGuess = "N/A";
 let showGiveAnswer = false;
 let countries;
 let haversineDistance;
-//sao tome and principle
+
 (async function getCountries() {
   const res = await fetch(
     "https://restcountries.com/v3.1/all?fields=name,latlng,population,independent,region"
@@ -19,7 +19,6 @@ let haversineDistance;
   let randoNum = Math.floor(Math.random() * 251);
   while (countryData[randoNum].independent !== true) {
     randoNum = Math.floor(Math.random() * 251);
-    console.log("ran");
   }
   const hemi = countryData[randoNum].latlng[0] > 0 ? "Northern" : "Southern";
   answer = {
@@ -35,10 +34,8 @@ let haversineDistance;
       countryNames.push(countryData[i].name.common.toLowerCase()); //adding all the country names to an array we can filter when the user types characters
     }
   }
-  console.log(answer.name);
-  console.log(countryData);
-  console.log(countryNames);
   countries = [...countryData];
+  console.log(answer.name); //fix cannot guess this twice
 })();
 
 let alreadyGuessed = [];
@@ -70,8 +67,7 @@ function getGuess(ev) {
     $(".suggestion-div").css("display", "none");
     return setTimeout(clear, 2500);
   }
-  console.log("ran get guess");
-  console.log(guess);
+
   for (let i = 0; i < countries.length; i++) {
     if (countries[i].name.common === guess) {
       userGuess = {
@@ -82,15 +78,13 @@ function getGuess(ev) {
         population: countries[i].population,
         hemisphere: countries[i].latlng[0] > 0 ? "Northern" : "Southern",
       };
-      console.log(userGuess);
-      console.log(answer);
+
       $(".suggestion-div").css("display", "none");
       alreadyGuessed.push(guess);
       return checkGuess();
     }
   }
-  console.log("running userguess next");
-  console.log(userGuess);
+
   if (userGuess === "N/A") {
     $(".invalid-guess").css("display", "block");
     $(".suggestion-div").css("display", "none");
@@ -111,7 +105,6 @@ function createGuess() {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   let distance = Math.round(r * c);
   haversineDistance = distance; //this is how many miles the user guess is in relation to the answer
-  console.log(haversineDistance);
   for (let key in answer) {
     if (answer[key] === userGuess[key]) {
       colors.push("green"); //if the answer's key = to userGuess's key then we want to display the color green otherwise display red for incorrect
@@ -120,7 +113,7 @@ function createGuess() {
     }
   }
   guesses++; // incrementing guesses so we can add it to the h5 dynamically
-  console.log(colors);
+
   addDiv.append(
     $(`<h5>${guesses}. ${userGuess.name}</h5>`).addClass(
       `row justify-content-start guess-h5`
@@ -138,10 +131,23 @@ function createGuess() {
       `guess-hint-div mx-auto ${region}`
     )
   );
+  let stringUserPopulation = userGuess.population.toString().split("");
+  let pop = stringUserPopulation.length;
+  if (pop < 7) {
+    pop = userGuess.population.toLocaleString();
+  } else if (pop === 7) {
+    pop = `${stringUserPopulation[0]}.${stringUserPopulation[1]}M`;
+  } else if (pop === 8) {
+    pop = `${stringUserPopulation[0]}${stringUserPopulation[1]}.${stringUserPopulation[2]}M`;
+  } else if (pop === 9) {
+    pop = `${stringUserPopulation[0]}${stringUserPopulation[1]}${stringUserPopulation[2]}.${stringUserPopulation[3]}M`;
+  } else {
+    pop = `${stringUserPopulation[0]}.${stringUserPopulation[1]}B`;
+  }
   const popColor = colors[4];
-  const arrowImg = $(
-    `<div>${userGuess.population.toLocaleString()}</div>`
-  ).addClass(`guess-hint-div mx-auto arrow-img-div ${popColor}`);
+  const arrowImg = $(`<div>${pop}</div>`).addClass(
+    `guess-hint-div mx-auto arrow-img-div ${popColor}`
+  );
   addDiv.append(arrowImg);
 
   let higherLower;
@@ -190,17 +196,6 @@ function createGuess() {
   }
 }
 
-function showSettings() {
-  let backgroundImg;
-  if ($("body").css("background-image") === "url(../images/worldmap.png)") {
-    backgroundImg = "none";
-  } else {
-    backgroundImg = "url(../images/worldmap.png)";
-  }
-  $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle();
-  $("body").css("background-image", backgroundImg);
-}
-
 let correctGuess = false;
 
 function checkGuess() {
@@ -209,8 +204,7 @@ function checkGuess() {
     correctGuess = true;
     $(".correct-answer").removeClass("collapse");
     $(".correct-answer").addClass("show");
-    setTimeout(() => location.reload(), 10000);
-    console.log("checked correctly");
+    setTimeout(() => location.reload(), 7000);
   }
   createGuess();
 }
@@ -226,7 +220,7 @@ function clear() {
 
 function autoSuggestion(e) {
   $(".suggestion-div").css("display", "block");
-  console.log(e.target.value);
+
   let names = [...countryNames];
   let val = e.target.value.toLowerCase().split("");
   names = names.filter((country) => {
@@ -235,7 +229,7 @@ function autoSuggestion(e) {
     });
   });
   names = names.sort();
-  console.log(names);
+
   $(".suggestion-ul").empty();
   names.forEach((name) => {
     return $(".suggestion-ul").append(`<li class='suggestion-li'>${name}</li>`);
@@ -279,7 +273,6 @@ function hideGiveAnswer() {
   $("#go-again, .congrats-h2, .first-bottom-hr").removeClass("collapse");
 
   if (gaveAnswer) {
-    console.log(gaveAnswer);
     userGuess = { ...answer };
     $(".congrats-h2").text(`The correct country was ${answer.name}.`);
     checkGuess();
@@ -288,9 +281,13 @@ function hideGiveAnswer() {
 
 form.on("submit", getGuess);
 
-settings.click(showSettings);
+settings.click(() =>
+  $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle()
+);
 
-$(".exit-img").click(showSettings);
+$(".exit-img").click(() =>
+  $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle()
+);
 
 $(".country-guess").on("input", autoSuggestion);
 
