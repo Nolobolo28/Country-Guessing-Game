@@ -35,7 +35,6 @@ let haversineDistance;
     }
   }
   countries = [...countryData];
-  console.log(answer.name); //fix cannot guess this twice
 })();
 
 let alreadyGuessed = [];
@@ -49,7 +48,8 @@ function getGuess(ev) {
       ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
     ).addClass("collapse");
     $("#go-again, .congrats-h2, .first-bottom-hr").removeClass("collapse");
-  }
+  } // this is hiding the give up div if it is shown we don't need it displaying after a user has guessed
+
   ev.preventDefault();
   let myForm = ev.target;
   let fd = new FormData(myForm);
@@ -60,9 +60,15 @@ function getGuess(ev) {
   guess = guess.replace(/\b\w/g, (l) => l.toUpperCase());
   guess = guess.replace(/(And)\s|(The)\s|(Of)\s/g, (l) => l.toLowerCase()); // if the word And is in the country it is replaced to all lower case
   guess = guess.replace(/(Dr)/g, (l) => l.toUpperCase()); //special case where Dr Congo needs to be DR Congo for Democratic Republic of the Congo
-  guess = guess.replace(/(O)\s|(N)cipe/g, (l) => l.toLowerCase());
-  if (alreadyGuessed.indexOf(guess) !== -1 && guess !== "") {
-    $(".invalid-h3").text("You can't guess this twice!");
+  guess = guess.replace(/(O)\s|(N)cipe/g, (l) => l.toLowerCase()); //also special case with accented letters
+
+  if (guess === "") {
+    $(".invalid-h3").text("Your guess is invalid!"); //displaying invalid guess if the user guesses nothing
+    $(".invalid-guess").css("display", "block");
+    $(".suggestion-div").css("display", "none");
+    setTimeout(clear, 2500);
+  } else if (alreadyGuessed.indexOf(guess) !== -1) {
+    $(".invalid-h3").text("You can't guess this twice!"); //checking the alreadyGuessed array if the user guessed anything twice
     $(".invalid-guess").css("display", "block");
     $(".suggestion-div").css("display", "none");
     return setTimeout(clear, 2500);
@@ -88,7 +94,7 @@ function getGuess(ev) {
   if (userGuess === "N/A") {
     $(".invalid-guess").css("display", "block");
     $(".suggestion-div").css("display", "none");
-    setTimeout(clear, 2500);
+    setTimeout(clear, 2500); // guess is invalid since we didn't find a country
   }
 }
 
@@ -116,20 +122,18 @@ function createGuess() {
 
   addDiv.append(
     $(`<h5>${guesses}. ${userGuess.name}</h5>`).addClass(
-      `row justify-content-start guess-h5`
+      `row text-left align-items-start guess-h5`
     )
   );
   const hemisphere = colors[5]; //adding the corresponding color
   addDiv.append(
     $(`<div>${userGuess.hemisphere}</div>`).addClass(
-      `guess-hint-div mx-auto ${hemisphere}`
+      `guess-hint-div ${hemisphere}`
     )
   );
   const region = colors[1];
   addDiv.append(
-    $(`<div>${userGuess.region}</div>`).addClass(
-      `guess-hint-div mx-auto ${region}`
-    )
+    $(`<div>${userGuess.region}</div>`).addClass(`guess-hint-div ${region}`)
   );
   let stringUserPopulation = userGuess.population.toString().split("");
   let pop = stringUserPopulation.length;
@@ -146,7 +150,7 @@ function createGuess() {
   }
   const popColor = colors[4];
   const arrowImg = $(`<div>${pop}</div>`).addClass(
-    `guess-hint-div mx-auto arrow-img-div ${popColor}`
+    `guess-hint-div arrow-img-div ${popColor}`
   );
   addDiv.append(arrowImg);
 
@@ -154,7 +158,7 @@ function createGuess() {
   if (answer.population > userGuess.population) {
     higherLower = "top";
   } else if (answer.population < userGuess.population) {
-    higherLower = "bottom";
+    higherLower = "bottom"; //displaying arrow image on bottom if userGuess population is too high
   }
   let src = "./images/arrow.png";
   let alt = "arrow image";
@@ -178,18 +182,18 @@ function createGuess() {
         .addClass("pin-img p-auto")
         .attr("src", "./images/pin.png")
         .attr("alt", "location pin image")
-    );
+    ); //adding the pin image if the user guessed correctly
   } else {
     distanceColor = "blue";
     addDiv.append(
       $(`<div>${haversineDistance.toLocaleString()}mi</div>`).addClass(
-        `guess-hint-div mx-auto miles-div ${distanceColor}`
+        `guess-hint-div miles-div ${distanceColor}`
       )
     );
   }
   if (guesses > 3) {
     addDiv.scrollTop($(".guess-location-div")[0].scrollHeight); //sets the scrollTop of the element to the scrollHeight of the element moving the scrollbar to the bottom
-    $(".guess-location-div").css("padding-bottom", "2rem");
+    $(".guess-location-div").css("padding-bottom", "2rem"); //adjusts the padding-bottom after the third guess
   }
   if (correctGuess === false) {
     clear();
@@ -220,7 +224,6 @@ function clear() {
 
 function autoSuggestion(e) {
   $(".suggestion-div").css("display", "block");
-
   let names = [...countryNames];
   let val = e.target.value.toLowerCase().split("");
   names = names.filter((country) => {
@@ -230,7 +233,7 @@ function autoSuggestion(e) {
   });
   names = names.sort();
 
-  $(".suggestion-ul").empty();
+  $(".suggestion-ul").empty(); //emptying the previous suggestions
   names.forEach((name) => {
     return $(".suggestion-ul").append(`<li class='suggestion-li'>${name}</li>`);
   });
@@ -253,17 +256,17 @@ function giveAnswer() {
   showGiveAnswer = true;
   $(
     ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
-  ).removeClass("collapse");
+  ).removeClass("collapse"); //removing the collapse class from bootstrap that is hiding the necessary elements
   $(
     ".correct-answer, .give-answer-btn, .confirm-give-answer .give-answer-exit"
   ).addClass("show");
-  $("#go-again, .congrats-h2, .first-bottom-hr").addClass("collapse");
+  $("#go-again, .congrats-h2, .first-bottom-hr").addClass("collapse"); //hiding elements that are not needed
 }
 
 let gaveAnswer = false;
 
 function hideGiveAnswer() {
-  showGiveAnswer = false;
+  showGiveAnswer = false; //changing showGiveAnswer to false to let us know that the give up div is currently not displaying
   $(
     ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
   ).removeClass("show");
@@ -274,16 +277,26 @@ function hideGiveAnswer() {
 
   if (gaveAnswer) {
     userGuess = { ...answer };
-    $(".congrats-h2").text(`The correct country was ${answer.name}.`);
+    $(".congrats-h2").text(`The correct country is ${answer.name}.`);
     checkGuess();
-  }
+  } // if user has elected to give up it is copying everything from the answer object and displaying the correct answer
 }
 
 form.on("submit", getGuess);
 
-settings.click(() =>
-  $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle()
-);
+settings.click(() => {
+  if (showGiveAnswer) {
+    $(
+      ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+    ).removeClass("show");
+    $(
+      ".correct-answer, .give-answer-btn, .confirm-give-answer, .give-answer-exit"
+    ).addClass("collapse");
+    $("#go-again, .congrats-h2, .first-bottom-hr").removeClass("collapse");
+    showGiveAnswer = false;
+  }
+  $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle();
+});
 
 $(".exit-img").click(() =>
   $(".hint-div, .input-div, .guess-location-div, .main-settings").toggle()

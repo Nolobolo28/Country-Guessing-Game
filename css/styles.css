@@ -13,7 +13,7 @@ body {
   background: var(--secondaryColor);
   color: var(--whiteColor);
   background-image: url(../images/worldmap.png);
-  background-size: 25%;
+  background-size: 26%;
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: 60%;
@@ -25,7 +25,7 @@ header {
 
 h1 {
   font-family: "DM Serif Display", serif;
-  font-size: 1.8em;
+  font-size: 1.6em;
   display: inline;
   letter-spacing: 2px;
 }
@@ -37,8 +37,8 @@ h1 {
 }
 
 .settings {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 5px;
   border: none;
   margin-bottom: 9px;
@@ -81,7 +81,8 @@ h1 {
 
 figcaption {
   padding-top: 5px;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 1px;
 }
 
@@ -192,6 +193,7 @@ h5 {
   font-size: 12px;
   letter-spacing: 1px;
   font-weight: 600;
+  margin: 0 auto;
 }
 
 .red {
@@ -211,7 +213,7 @@ h5 {
 }
 
 .suggestion-ul {
-  max-height: 240px;
+  max-height: 230px;
   max-width: 17%;
   list-style: none;
   background: #464646;
@@ -306,19 +308,15 @@ h5 {
   }
 
   .h1-title {
-    font-size: 24px;
+    font-size: 21px;
   }
 
   .settings {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     margin-bottom: 7px;
-    margin-left: 10px;
   }
 
-  .exit-img {
-  }
-  /* on this one */
   .top-hr {
     width: 100%;
   }
@@ -339,32 +337,29 @@ h5 {
 
   .guess-location-div {
     width: 92%;
-    max-height: 53vh;
-    padding-top: 8px;
-    padding-bottom: 18rem;
+    padding-top: 12px;
   }
 
   .guess-h5 {
-    padding-top: 12px;
     font-size: 1em;
   }
 
   .guess-hint-div {
-    width: 70px;
-    height: 60px;
-    border-radius: 100%;
+    width: 68px;
+    height: 58px;
     padding: 20px 0 0 0;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
+    margin: 0 auto;
   }
 
   .arrow-img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   .top {
-    top: 3px;
+    top: 2px;
     right: 27px;
   }
 
@@ -380,6 +375,7 @@ h5 {
 
   .confirm-answer-div {
     margin-top: 0.4em;
+    max-width: 80%;
   }
 
   .give-answer-btn {
@@ -403,7 +399,7 @@ h5 {
   }
 
   .input-div {
-    padding-top: 1rem;
+    padding-top: 10px;
   }
 
   .invalid-h3 {
@@ -412,7 +408,7 @@ h5 {
 
   .suggestion-ul {
     max-height: 140px;
-    max-width: 59%;
+    max-width: 220px;
     font-size: 1em;
     padding: 10px;
     bottom: 48px;
@@ -464,7 +460,7 @@ h5 {
 
 @media (min-width: 481px) and (max-width: 767px) {
   body {
-    background-size: 100%;
+    background-size: 55%;
   }
 
   .h1-title {
@@ -472,10 +468,9 @@ h5 {
   }
 
   .settings {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     margin-bottom: 7px;
-    margin-left: 10px;
   }
 
   .exit-img {
@@ -485,42 +480,45 @@ h5 {
   }
 
   .top-hr {
-    width: 80%;
+    width: 90%;
   }
 
   .settings-divs {
     padding-top: 1.4rem;
   }
 
+  .settings-p {
+    font-size: 15px;
+  }
+
   .hint-imgs {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
   }
 
   figcaption {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
   }
 
   .guess-location-div {
-    width: 92%;
-    max-height: 53vh;
-    padding-top: 8px;
-    padding-bottom: 18rem;
+    width: 70%;
+    padding-top: 14px;
   }
 
   .guess-h5 {
     padding-top: 12px;
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   .guess-hint-div {
-    width: 70px;
-    height: 60px;
+    width: 73px;
+    height: 63px;
     border-radius: 100%;
-    padding: 20px 0 0 0;
+    padding: 22px 0 0 0;
     font-size: 10px;
     font-weight: 700;
+    margin: 0 auto;
   }
 
   .arrow-img {
@@ -540,7 +538,7 @@ h5 {
   }
 
   .bottom-hr {
-    width: 100%;
+    width: 80%;
   }
 
   .confirm-answer-div {
@@ -548,7 +546,168 @@ h5 {
   }
 
   .give-answer-btn {
-    width: 55px;
+    width: 50px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .confirm-give-answer {
+    font-size: 14px;
+  }
+
+  .give-answer-exit {
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .congrats-h2 {
+    padding: 8px;
+    font-size: 1.4em;
+  }
+
+  .input-div {
+    padding-top: 10px;
+  }
+
+  .invalid-h3 {
+    font-size: 24px;
+  }
+
+  .suggestion-ul {
+    max-height: 140px;
+    max-width: 250px;
+    font-size: 1em;
+    padding: 10px;
+    bottom: 52px;
+  }
+
+  .pin-img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .question-mark-img {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    margin-top: 12px;
+  }
+
+  .country-guess-border {
+    margin: 14px 14px 0 14px;
+  }
+
+  .country-guess {
+    height: 30px;
+    min-width: 250px;
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .country-guess::placeholder {
+    font-size: 1em;
+  }
+
+  .country-guess:focus,
+  .country-guess:active {
+    font-size: 1em;
+  }
+
+  .enter-img {
+    width: 41px;
+    height: 41px;
+    margin-top: 12px;
+    padding: 8px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  body {
+    background-size: 50%;
+  }
+
+  .h1-title {
+    font-size: 30px;
+  }
+
+  .settings {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 8px;
+  }
+
+  .exit-img {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 7px;
+  }
+
+  .top-hr {
+    width: 70%;
+  }
+
+  .settings-divs {
+    padding-top: 1.6rem;
+  }
+
+  .settings-p {
+    font-size: 14px;
+  }
+
+  .hint-imgs {
+    width: 42px;
+    height: 42px;
+  }
+
+  figcaption {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .guess-location-div {
+    width: 48%;
+    padding-top: 1em;
+  }
+
+  .guess-h5 {
+    padding-top: 12px;
+    font-size: 1.2em;
+  }
+
+  .guess-hint-div {
+    width: 75px;
+    height: 65px;
+    padding: 22px 0 0 0;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0 auto;
+  }
+
+  .arrow-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .top {
+    top: 3px;
+    right: 28px;
+  }
+
+  .bottom {
+    bottom: 6px;
+    left: 28px;
+  }
+
+  .bottom-hr {
+    width: 70%;
+  }
+
+  .confirm-answer-div {
+    margin-top: 0.6em;
+  }
+
+  .give-answer-btn {
+    width: 54px;
     height: 34px;
     font-size: 14px;
   }
@@ -558,29 +717,29 @@ h5 {
   }
 
   .give-answer-exit {
-    width: 15px;
-    height: 15px;
+    width: 0.9em;
+    height: 0.9em;
   }
 
   .congrats-h2 {
     padding: 8px;
-    font-size: 1.3em;
+    font-size: 1.6em;
   }
 
   .input-div {
-    padding-top: 1rem;
+    padding-top: 10px;
   }
 
   .invalid-h3 {
-    font-size: 20px;
+    font-size: 26px;
   }
 
   .suggestion-ul {
     max-height: 140px;
-    max-width: 59%;
-    font-size: 1em;
+    max-width: 260px;
+    font-size: 17px;
     padding: 10px;
-    bottom: 48px;
+    bottom: 58px;
   }
 
   .pin-img {
@@ -589,40 +748,112 @@ h5 {
   }
 
   .question-mark-img {
-    width: 35px;
-    height: 35px;
+    width: 42px;
+    height: 42px;
     padding: 8px;
-    margin-top: 12px;
+    margin-top: 14px;
   }
 
   .country-guess-border {
-    margin: 10px 10px 0 10px;
+    margin: 18px 18px 0 18px;
   }
 
   .country-guess {
-    height: 25px;
-    min-width: 220px;
-    padding: 8px;
-    font-size: 14px;
+    height: 36px;
+    min-width: 260px;
+    padding: 12px;
+    font-size: 17px;
   }
 
   .country-guess::placeholder {
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .country-guess:focus,
   .country-guess:active {
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .enter-img {
-    width: 37px;
-    height: 37px;
-    margin-top: 12px;
+    width: 43px;
+    height: 43px;
+    margin-top: 14px;
     padding: 8px;
   }
+}
 
-  .settings-p {
-    font-size: 13px;
+@media (min-width: 1001px) and (max-width: 1600px) {
+  body {
+    background-size: 32%;
+  }
+
+  .top-hr {
+    width: 40%;
+  }
+
+  .bottom-hr {
+    width: 40%;
+  }
+
+  .guess-hint-div {
+    width: 82px;
+    height: 72px;
+    padding: 24px 0 0 0;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0 auto;
+  }
+
+  .guess-location-div {
+    width: 38%;
+    padding-top: 1em;
+  }
+
+  .top {
+    top: 2px;
+    right: 30px;
+  }
+
+  .bottom {
+    bottom: 6px;
+    left: 30px;
+  }
+
+  .pin-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .suggestion-ul {
+    max-height: 140px;
+    max-width: 260px;
+    font-size: 17px;
+    padding: 10px;
+    bottom: 58px;
+  }
+
+  .country-guess {
+    height: 36px;
+    min-width: 260px;
+    padding: 12px;
+    font-size: 17px;
+  }
+
+  .confirm-give-answer {
+    font-size: 1em;
+  }
+
+  .give-answer-exit {
+    width: 1em;
+    height: 1em;
+  }
+
+  .congrats-h2 {
+    padding: 8px;
+    font-size: 1.4em;
+  }
+
+  .input-div {
+    padding-top: 10px;
   }
 }
